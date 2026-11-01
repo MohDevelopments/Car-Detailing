@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Car Detailing Demo</title>
+<meta name="description" content="Car Detailing Demo: an animated front-end portfolio project with a live paint studio, package builder and inspection light.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🏎️%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Manrope:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+<script src="script.js" defer></script>
+</head>
+<body>
+<div id="boot"><span>Warming up the garage</span><b id="bn">0%</b></div>
+<div id="sp"></div>
+
+<header class="nav">
+  <div class="wrap bar">
+    <a class="brand" href="#top">◆ Car Detailing Demo</a>
+    <nav aria-label="Main"><a href="#build">Build</a><a href="#inspect">Inspect</a><a href="#process">Process</a><a href="#faq">FAQ</a></nav>
+    <button class="btn sm mag" data-book="">Book a detail</button>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="top">
+  <div id="streaks" aria-hidden="true"></div>
+  <div class="wrap hc">
+    <h1 class="split" aria-label="Paint so deep it looks wet.">Paint so deep it looks wet.</h1>
+    <p class="lead">Hand-finished paint correction, ceramic coating and interior restoration. Pick a color, then fire it up.</p>
+    <div class="row">
+      <button class="btn mag" id="rev">Start engine</button>
+      <a class="btn ghost mag" href="#build">Build my detail</a>
+      <span class="rpm"><b id="rpm">0</b> rpm</span>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="car" id="car"><div class="tilt">
+      <svg viewBox="0 0 640 230" role="img" aria-label="Sports coupe in the selected paint color">
+        <defs>
+          <path id="bp" d="M40 152C38 130 44 120 62 116L118 108C150 92 190 66 236 60L328 58C362 60 396 84 430 100L520 112C552 118 566 132 568 152L560 160H520A40 40 0 0 0 440 160H190A40 40 0 0 0 110 160H48Z"/>
+          <clipPath id="bc"><use href="#bp"/></clipPath>
+          <linearGradient id="sh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".28"/><stop offset=".45" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".6"/></linearGradient>
+          <linearGradient id="sw"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+          <linearGradient id="bm"><stop offset="0" stop-color="#fff" stop-opacity=".75"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+          <linearGradient id="gl" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#090b12"/><stop offset="1" stop-color="#2b3550"/></linearGradient>
+        </defs>
+        <polygon class="beam" points="566,128 1180,10 1180,260" fill="url(#bm)"/>
+        <ellipse cx="310" cy="198" rx="290" ry="10" fill="#000" opacity=".65"/>
+        <use href="#bp" style="fill:var(--paint)"/>
+        <g clip-path="url(#bc)">
+          <rect width="640" height="230" fill="url(#sh)"/>
+          <path class="gloss" d="M56 128C200 112 400 112 566 134" stroke="#fff" stroke-width="4" fill="none"/>
+          <g class="sweep"><rect x="-160" width="110" height="230" fill="url(#sw)" transform="skewX(-20)"/></g>
+        </g>
+        <path d="M146 106C176 90 204 72 238 67L326 65C352 67 376 84 410 102Z" fill="url(#gl)"/>
+        <path d="M180 102L228 70h22l-48 32z" fill="#fff" opacity=".12"/>
+        <path d="M268 66V105" style="stroke:var(--paint)" stroke-width="7"/>
+        <path d="M270 110V156M342 112V156" stroke="#000" opacity=".35"/>
+        <rect x="298" y="118" width="26" height="4" rx="2" fill="#000" opacity=".4"/>
+        <path class="hl" d="M520 118L560 124 564 134 524 128Z" fill="#fff"/>
+        <rect class="tail" x="40" y="124" width="22" height="7" rx="3" fill="#ff2e4d"/>
+        <g transform="translate(150 160)"><circle r="36" fill="#07080c"/><circle r="26" fill="#161925" stroke="#cfd6e6" stroke-width="2"/><g stroke="#cfd6e6" stroke-width="4" stroke-linecap="round"><path d="M0-20V20M-20 0H20M-14-14L14 14M-14 14L14-14"/><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="8s" repeatCount="indefinite"/></g><circle r="5" fill="#cfd6e6"/></g>
+        <g transform="translate(480 160)"><circle r="36" fill="#07080c"/><circle r="26" fill="#161925" stroke="#cfd6e6" stroke-width="2"/><g stroke="#cfd6e6" stroke-width="4" stroke-linecap="round"><path d="M0-20V20M-20 0H20M-14-14L14 14M-14 14L14-14"/><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="8s" repeatCount="indefinite"/></g><circle r="5" fill="#cfd6e6"/></g>
+      </svg>
+    </div></div>
+    <div class="floor" aria-hidden="true"></div>
+  </div>
+
+  <div class="dock" role="group" aria-label="Paint studio">
+    <span class="dl">Paint</span>
+    <button class="sw" style="--c:#7c4dff" aria-label="Nightfall violet" aria-pressed="true"></button>
+    <button class="sw" style="--c:#ff2e4d" aria-label="Racing red" aria-pressed="false"></button>
+    <button class="sw" style="--c:#2fd6ff" aria-label="Glacier blue" aria-pressed="false"></button>
+    <button class="sw" style="--c:#ff8a1f" aria-label="Sunset orange" aria-pressed="false"></button>
+    <button class="sw" style="--c:#22e08a" aria-label="Neon green" aria-pressed="false"></button>
+    <button class="sw" style="--c:#e8ecf4" aria-label="Pearl white" aria-pressed="false"></button>
+    <span class="dl">Finish</span>
+    <div class="fin"><button data-gl="1" aria-pressed="true">Gloss</button><button data-gl=".1" aria-pressed="false">Matte</button></div>
+  </div>
+</section>
+
+<div class="mq" aria-hidden="true"><div class="mt"><span>Paint correction</span><span>Ceramic coating</span><span>Interior steam</span><span>Headlight restore</span><span>Engine bay</span><span>Hand wash</span><span>Leather care</span><span>Wheel detail</span></div></div>
+
+<section id="build" class="wrap sec">
+  <h2 class="rv">Build your detail</h2>
+  <p class="sub rv">Choose a package, add extras and watch the numbers move. Prices are demo values.</p>
+  <div class="bld">
+    <form id="bf" class="panel rv">
+      <fieldset class="seg"><legend>Vehicle</legend>
+        <label><input type="radio" name="sz" value="1" checked><span>Compact</span></label>
+        <label><input type="radio" name="sz" value="1.2"><span>Sedan</span></label>
+        <label><input type="radio" name="sz" value="1.45"><span>SUV</span></label>
+      </fieldset>
+      <fieldset class="pk"><legend>Package</legend>
+        <label class="card"><input type="radio" name="pk" value="express"><span><b>Express</b><small>A quick shine for a daily driver.</small></span></label>
+        <label class="card"><input type="radio" name="pk" value="signature" checked><span><b>Signature</b><small>Clay, polish and a sealed finish.</small></span></label>
+        <label class="card"><input type="radio" name="pk" value="showroom"><span><b>Showroom</b><small>Full paint correction, inside and out.</small></span></label>
+      </fieldset>
+      <fieldset class="chips"><legend>Extras</legend>
+        <label><input type="checkbox" name="ad" value="250" data-t="3" data-p="25" data-n="Ceramic coating"><span>Ceramic coating +$250</span></label>
+        <label><input type="checkbox" name="ad" value="60" data-t="1" data-p="5" data-n="Headlight restore"><span>Headlight restore +$60</span></label>
+        <label><input type="checkbox" name="ad" value="70" data-t="1" data-p="5" data-n="Engine bay detail"><span>Engine bay +$70</span></label>
+        <label><input type="checkbox" name="ad" value="90" data-t="1.5" data-p="10" data-n="Interior steam clean"><span>Interior steam +$90</span></label>
+      </fieldset>
+    </form>
+    <aside class="res card rv">
+      <div class="gauge"><svg class="ring" viewBox="0 0 120 120" aria-hidden="true"><circle class="trk" cx="60" cy="60" r="52"/><circle class="arc" cx="60" cy="60" r="52"/></svg><div class="gv"><span><b id="pv">0</b>%</span><small>protection</small></div></div>
+      <div class="big" id="tot">$0</div>
+      <p class="mut" id="tm"></p>
+      <ul id="steps"></ul>
+      <button class="btn mag" data-book="est">Book this detail</button>
+    </aside>
+  </div>
+</section>
+
+<section id="inspect" class="wrap sec">
+  <h2 class="rv">Grab the inspection light</h2>
+  <p class="sub rv">One hood, before and after correction. Move the light to reveal the finish. On a phone, drag.</p>
+  <div class="lab rv" id="lab" role="img" aria-label="Interactive paint comparison: swirled paint with a lens revealing a corrected finish">
+    <div class="ly dull"></div><div class="ly fixd"></div><div class="lens"></div>
+    <i class="tag a">Before</i><i class="tag b">After, under the light</i>
+  </div>
+</section>
+
+<section id="process" class="wrap sec narrow">
+  <h2 class="rv">Our process, in order</h2>
+  <ol class="tl" id="tl">
+    <li class="card"><h3>Foam and rinse</h3><p>A thick foam lifts loose grit so the paint is never dragged across.</p></li>
+    <li class="card"><h3>Decontaminate</h3><p>Iron remover and a clay bar pull out what washing can’t.</p></li>
+    <li class="card"><h3>Correct</h3><p>Machine polishing removes swirls and light scratches under bright lamps.</p></li>
+    <li class="card"><h3>Protect</h3><p>Sealant or ceramic locks in the gloss and repels water.</p></li>
+    <li class="card"><h3>Final inspection</h3><p>We check every panel in daylight before the keys come back.</p></li>
+  </ol>
+</section>
+
+<section id="faq" class="wrap sec narrow">
+  <h2 class="rv">Quick answers</h2>
+  <details name="faq" open><summary>How long does ceramic coating last?</summary><p>With basic care, several years. Your detailer will share a simple maintenance routine.</p></details>
+  <details name="faq"><summary>Will polishing damage my paint?</summary><p>No. We measure paint thickness first and use the lightest method that works.</p></details>
+  <details name="faq"><summary>Can I stay while you work?</summary><p>Of course. Watch from the lounge or drop the car off and relax.</p></details>
+</section>
+
+<section class="wrap">
+  <div class="cta rv"><h2>Ready for the mirror finish?</h2><button class="btn mag" data-book="">Book a detail</button></div>
+</section>
+</main>
+
+<footer class="wrap foot"><span>◆ Car Detailing Demo</span><span>A front-end portfolio project. Names and prices are made up. © <span id="yr"></span></span></footer>
+
+<dialog id="dlg" aria-labelledby="dt">
+  <div class="pad">
+    <button class="x" data-close aria-label="Close">✕</button>
+    <form id="book">
+      <h3 id="dt">Book your detail</h3>
+      <p id="sum" class="mut"></p>
+      <label>Your name<input name="name" required autocomplete="name" placeholder="Alex"></label>
+      <label>Preferred day<input name="day" type="date" required></label>
+      <label>Time<select name="time"><option>Morning</option><option>Afternoon</option><option>Evening</option></select></label>
+      <button class="btn" type="submit">Confirm booking</button>
+    </form>
+    <div id="done" hidden>
+      <div class="em">🏁</div>
+      <h3>You’re booked, <span id="who"></span>!</h3>
+      <p class="mut">This is a demo, so nothing was sent.</p>
+      <button class="btn" data-close>Done</button>
+    </div>
+  </div>
+</dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
